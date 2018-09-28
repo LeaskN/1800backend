@@ -6,7 +6,7 @@ const logger = require('morgan');
 
 const app = express();
 
-const people = require('./api/people')
+const people = require('./api/people');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -27,7 +27,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: req.app.get('env') === 'development'
+    error: req.app.get('env') === 'development' ? err : {}
   });
 });
 

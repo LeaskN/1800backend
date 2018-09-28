@@ -4,6 +4,11 @@ const router = express.Router();
 
 const queries = require('../db/queries');
 
+function isValidId(req, res, next) {
+    if(!isNaN(req.params.id)) return next();
+    next(new Error('Invalid ID'));
+}
+
 function validPerson(person) {
     const hasFirst = typeof person.first == 'string' && person.first.trim() != '';
     const hasLast = typeof person.last == 'string' && person.last.trim() != '';
@@ -13,10 +18,6 @@ function validPerson(person) {
     return hasFirst && hasLast && hasURL && hasDescription && hasAge;
 }
 
-function isValidId(req, res, next) {
-    if(!isNaN(req.params.id)) return next();
-    next(new Error('Invalid ID'));
-}
 
 router.get('/', (req, res) => {
     queries.getAll().then(people => {
@@ -28,9 +29,9 @@ router.get('/:id', isValidId, (req, res, next) => {
     queries.getOne(req.params.id).then(person => {
         if (person) {
             res.json(person);
+        } else {
+            next();
         }
-        res.status(404);
-        next();
     })
 });
 
