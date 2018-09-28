@@ -6,7 +6,7 @@ const logger = require('morgan');
 
 const app = express();
 
-const people = require('./api/people.js');
+const people = require('./api/people');
 
 app.use(logger('dev'));
 app.use(express.json());
