@@ -21,7 +21,7 @@ module.exports = [
         age: "11",
         location: "Godric's Hollow",
         description: "The boy who lived",
-        url: "https://support.feralinteractive.com/images/icon_overrides/legoharrypotter.png"
+        url: "https://support.feralinteractive.com/images/icon_overrides/legoharrypotter2.png"
     },
     {
         first: "Ron",
